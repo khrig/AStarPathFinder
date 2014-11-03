@@ -1,0 +1,6 @@
+C:\Code\AStarPathFinder\AStarPathFinder\bin\Debug\AStarPathFinder.exe.config
+C:\Code\AStarPathFinder\AStarPathFinder\obj\Debug\AStarPathFinder.csprojResolveAssemblyReference.cache
+C:\Code\AStarPathFinder\AStarPathFinder\bin\Debug\AStarPathFinder.exe
+C:\Code\AStarPathFinder\AStarPathFinder\bin\Debug\AStarPathFinder.pdb
+C:\Code\AStarPathFinder\AStarPathFinder\obj\Debug\AStarPathFinder.exe
+C:\Code\AStarPathFinder\AStarPathFinder\obj\Debug\AStarPathFinder.pdb
