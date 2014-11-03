@@ -5,10 +5,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AStarPathFinder
-{
-    public class PathFinder
-    {
+namespace AStarPathFinder {
+    public class PathFinder {
         private List<Point> open = new List<Point>();
         private List<Point> closed = new List<Point>();
         private List<Point> path = new List<Point>();
@@ -16,10 +14,14 @@ namespace AStarPathFinder
         private int[,] grid;
         private Point end;
 
-        public List<Point> FindPath(int[,] grid, Point start, Point end) {
+        private bool isDiagonalMovesEnabled;
+
+        public List<Point> FindPath(int[,] grid, Point start, Point end, bool enableDiagonalMoves) {
             open = new List<Point>();
             closed = new List<Point>();
             path = new List<Point>();
+
+            isDiagonalMovesEnabled = enableDiagonalMoves;
 
             this.grid = grid;
             this.end = end;
@@ -53,7 +55,7 @@ namespace AStarPathFinder
         }
 
         private Point GetLowestCostPoint() {
-            Point currentPoint = open.First(); 
+            Point currentPoint = open.First();
             foreach (Point p in open) {
                 if (p.FScore < currentPoint.FScore) {
                     currentPoint = p;
@@ -66,35 +68,33 @@ namespace AStarPathFinder
             List<Point> adjacent = new List<Point>();
 
             int maxY = grid.GetLength(0) - 1, maxX = grid.GetLength(1) - 1;
-            
+
             // Left
             ValidateAndAdd(maxY, maxX, point.X - 1, point.Y, point, adjacent, false);
-            
-            // Left, up one
-            ValidateAndAdd(maxY, maxX, point.X - 1, point.Y - 1, point, adjacent, true);
-
             // Up one
             ValidateAndAdd(maxY, maxX, point.X, point.Y - 1, point, adjacent, false);
-            
-            // Right, up one
-            ValidateAndAdd(maxY, maxX, point.X + 1, point.Y - 1, point, adjacent, true);
-
             // Right
             ValidateAndAdd(maxY, maxX, point.X + 1, point.Y, point, adjacent, false);
-
-            //Right down one
-            ValidateAndAdd(maxY, maxX, point.X + 1, point.Y + 1, point, adjacent, true);
-            
             // Under
             ValidateAndAdd(maxY, maxX, point.X, point.Y + 1, point, adjacent, false);
-            
-            // Left down one
-            ValidateAndAdd(maxY, maxX, point.X - 1, point.Y + 1, point, adjacent, true);
+
+
+            // Diagonal moves
+            if (isDiagonalMovesEnabled) {
+                // Left, up one
+                ValidateAndAdd(maxY, maxX, point.X - 1, point.Y - 1, point, adjacent, true);
+                // Right, up one
+                ValidateAndAdd(maxY, maxX, point.X + 1, point.Y - 1, point, adjacent, true);
+                //Right down one
+                ValidateAndAdd(maxY, maxX, point.X + 1, point.Y + 1, point, adjacent, true);
+                // Left down one
+                ValidateAndAdd(maxY, maxX, point.X - 1, point.Y + 1, point, adjacent, true);
+            }
 
             return adjacent;
         }
 
-        private void ValidateAndAdd(int maxY ,int maxX, int x, int y, Point parent, List<Point> adjacent, bool isDiagonal) {
+        private void ValidateAndAdd(int maxY, int maxX, int x, int y, Point parent, List<Point> adjacent, bool isDiagonal) {
             if (x < 0 || x > maxX || y < 0 || y > maxY) return;
             if (closed.Any(p => p.IsEqual(x, y))) return;
 
