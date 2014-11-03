@@ -65,7 +65,7 @@ namespace AStarPathFinder
         private List<Point> GetAllAdjacent(Point point) {
             List<Point> adjacent = new List<Point>();
 
-            int maxY = grid.GetLength(0), maxX = grid.GetLength(1);
+            int maxY = grid.GetLength(0) - 1, maxX = grid.GetLength(1) - 1;
             
             // Left
             ValidateAndAdd(maxY, maxX, point.X - 1, point.Y, point, adjacent, false);
@@ -94,8 +94,8 @@ namespace AStarPathFinder
             return adjacent;
         }
 
-        private void ValidateAndAdd(int maxX, int maxY, int x, int y, Point parent, List<Point> adjacent, bool isDiagonal) {
-            if (x < 0 || x > 6 || y < 0 || y > 4) return;
+        private void ValidateAndAdd(int maxY ,int maxX, int x, int y, Point parent, List<Point> adjacent, bool isDiagonal) {
+            if (x < 0 || x > maxX || y < 0 || y > maxY) return;
             if (closed.Any(p => p.IsEqual(x, y))) return;
 
             if (grid[y, x] != 1) // grid[y, x] == 0 || grid[y, x] == 3
