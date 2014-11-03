@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace AStarPathFinder {
     public class PathFinder {
+
+        // Info from
+        // http://www.policyalmanac.org/games/aStarTutorial.htm
+
+
         private List<Point> open = new List<Point>();
         private List<Point> closed = new List<Point>();
         private List<Point> path = new List<Point>();
