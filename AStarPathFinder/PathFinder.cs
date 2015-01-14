@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace AStarPathFinder {
@@ -137,7 +138,8 @@ namespace AStarPathFinder {
         // the current square, ignoring diagonal movement, and ignoring any obstacles that may be in the way.
         //  We then multiply the total by 10, our cost for moving one square horizontally or vertically.
         private int CalculateHScore(int x, int y) {
-            return end.X - x + end.Y - y;
+            return Math.Abs(end.X - x) + Math.Abs(end.Y - y);
+            //return end.X - x + end.Y - y;
         }
     }
 }

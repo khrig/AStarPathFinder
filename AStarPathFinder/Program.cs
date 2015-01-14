@@ -9,7 +9,7 @@ namespace AStarPathFinder {
             // 2 = start
             // 3 = end
 
-            int[,] grid = TestGrids.GetGrid(4);
+            int[,] grid = TestGrids.GetGrid(6);
 
             DrawGrid(grid);
 
